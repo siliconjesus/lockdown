@@ -1,5 +1,6 @@
 Items that need to be addressed.
 
+* Make sure we're running as root!
 * Finish logic for figuring out which version of Fedora script is running on
 * Determine exactly what is going to be locked down
 * Add GPL license information 
