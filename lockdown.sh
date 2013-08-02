@@ -54,7 +54,7 @@ lockdown(){
 -A INPUT -p tcp --dport 22 -j CHECKIP
 -A INPUT -p tcp --dport 443 -j CHECKIP
 #### Put in the CHECKIP stuff and logging along with the DROP stuff.
-
+EOF
 	# Lockdown sshd server.
 sed -e 's/#PermitRootLogin yes/PermitRootLogin no/'
 sed -e 's/#Banner none/Banner \/etc\/ssh\/ssh.banner/'
