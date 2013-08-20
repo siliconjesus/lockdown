@@ -39,9 +39,18 @@ lockdown(){
 	/sbin/service iptables stop
 	/sbin/service iptables-ipv6 stop
 	
+	# We need to get the ip address of the primary network interface
+	# plus its network information.  Luckily ifconfig does a lot of that for us.
+	
+	##### TODO: add stuff to get additional network interfaces.
+	
+	eth0_addr=`ifconfig eth0 | grep Mask: | awk -F: '{print $2}'`
+	eth0_bcast=`ifconfig eth0 | grep Mask: | awk -F: '{print $4}'`
+	eth0_netmask=`ifconfig eth0 | grep Mask: | awk -F: '{print $6}'`
+		
 	cat > /etc/sysconfig/iptables << EOF
 # Custom rules created by the lockdown script
-# Copyright Jon Mentzell 2011
+# Copyright Jon Mentzell 2013
 # Licensed under the GPL
 *filter
 :INPUT DROP [0:0]
