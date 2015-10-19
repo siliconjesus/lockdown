@@ -27,14 +27,19 @@ errorExit(){
 }
 
 # lockdown - the script that does the heavy lifting.  Will call other functions as needed.
+fedoraPrep(){
+	iptables=/etc/sysconfig/iptables
+	installer="yum install -y"
+	packages="openssh openssh_server iptables iptables-ipv6"
+}
 
 lockdown(){
 	# Add rpms in case they're needed.
-	yum install -y openssh openssh_server iptables iptables-ipv6 
+	$installer $packages
 	
 	# first lock down iptables
-	cp /etc/sysconfig/iptables /etc/sysconfig/iptables.orig
-	cp /etc/sysconfig/iptables.ipv6 /etc/sysconfig/iptables.ipv6.orig
+	cp $iptables $iptables.orig
+	cp $iptables.ipv6 $iptables.ipv6.orig
 
 	/sbin/service iptables stop
 	/sbin/service iptables-ipv6 stop
@@ -48,7 +53,7 @@ lockdown(){
 	eth0_bcast=`ifconfig eth0 | grep Mask: | awk -F: '{print $4}'`
 	eth0_netmask=`ifconfig eth0 | grep Mask: | awk -F: '{print $6}'`
 		
-	cat > /etc/sysconfig/iptables << EOF
+	cat > $iptables << EOF
 # Custom rules created by the lockdown script
 # Copyright Jon Mentzell 2013
 # Licensed under the GPL
@@ -65,8 +70,8 @@ lockdown(){
 #### Put in the CHECKIP stuff and logging along with the DROP stuff.
 EOF
 	# Lockdown sshd server.
-sed -e 's/#PermitRootLogin yes/PermitRootLogin no/'
-sed -e 's/#Banner none/Banner \/etc\/ssh\/ssh.banner/'
+sed -e 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd.conf
+sed -e 's/#Banner none/Banner \/etc\/ssh\/ssh.banner/' /etc/ssh/sshd.conf
 
 cat > /etc/ssh.banner << EOF
 ######################## W A R N I N G #########################
@@ -94,6 +99,7 @@ if [ -f /etc/redhat-release ]
 			then
 				errorExit
 		else 
+			fedoraPrep
 			lockdown
 		fi
 	else
