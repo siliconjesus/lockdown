@@ -26,13 +26,22 @@ errorExit(){
 	exit 999
 }
 
-# lockdown - the script that does the heavy lifting.  Will call other functions as needed.
 fedoraPrep(){
 	iptables=/etc/sysconfig/iptables
 	installer="yum install -y"
 	packages="openssh openssh_server iptables iptables-ipv6"
+	servicename="iptables"
+	servicenamev6="iptablesv6"
 }
 
+ubuntuPrep(){
+	iptables=/etc/iptables
+	installer="apt-get install -y"
+	packages="openssh openssh-server iptables-persistent"
+	servicename="iptables-persistent"
+}
+
+# lockdown - the script that does the heavy lifting.  Will call other functions as needed.
 lockdown(){
 	# Add rpms in case they're needed.
 	$installer $packages
@@ -55,7 +64,7 @@ lockdown(){
 		
 	cat > $iptables << EOF
 # Custom rules created by the lockdown script
-# Copyright Jon Mentzell 2013
+# Copyright Jon Mentzell 2013-2015
 # Licensed under the GPL
 *filter
 :INPUT DROP [0:0]
