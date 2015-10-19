@@ -28,6 +28,7 @@ errorExit(){
 
 fedoraPrep(){
 	iptables=/etc/sysconfig/iptables
+	iptablesv6=/etc/sysconfig/iptables.v6
 	installer="yum install -y"
 	packages="openssh openssh_server iptables iptables-ipv6"
 	servicename="iptables"
@@ -35,7 +36,8 @@ fedoraPrep(){
 }
 
 ubuntuPrep(){
-	iptables=/etc/iptables
+	iptables=/etc/iptables/rules.v4
+	iptablesv6=/etc/iptables/rules.v6
 	installer="apt-get install -y"
 	packages="openssh openssh-server iptables-persistent"
 	servicename="iptables-persistent"
@@ -48,7 +50,7 @@ lockdown(){
 	
 	# first lock down iptables
 	cp $iptables $iptables.orig
-	cp $iptables.ipv6 $iptables.ipv6.orig
+	cp $iptablesv6 $iptablesv6.orig
 
 	/sbin/service iptables stop
 	/sbin/service iptables-ipv6 stop
