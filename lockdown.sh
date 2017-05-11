@@ -2,7 +2,7 @@
 
 # Script to lock down a Fedora based Linux system
 
-#    Copyright 2011, Jon Mentzell <siliconjesus@gmail.com>
+#    Copyright 2011-2017, Jon Mentzell <siliconjesus@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -66,8 +66,8 @@ lockdown(){
 		
 	cat > $iptables << EOF
 # Custom rules created by the lockdown script
-# Copyright Jon Mentzell 2013-2015
-# Licensed under the GPL
+# Copyright Jon Mentzell 2013-2017
+# Licensed under the GPL version 2
 *filter
 :INPUT DROP [0:0]
 :FORWARD REJECT [0:0]
