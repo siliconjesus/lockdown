@@ -66,7 +66,7 @@ lockdown(){
 		
 	cat > $iptables << EOF
 # Custom rules created by the lockdown script
-# Copyright Jon Mentzell 2013-2017
+# Copyright Jon Mentzell 2013-2018
 # Licensed under the GPL version 2
 *filter
 :INPUT DROP [0:0]
