@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Script to lock down a Fedora based Linux system
+# Script to secure Unix-like operating systems
 
-#    Copyright 2011-2017, Jon Mentzell <siliconjesus@gmail.com>
+#    Copyright 2011-2018, Jon Mentzell <siliconjesus@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
