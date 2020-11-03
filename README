@@ -1,3 +1,5 @@
 This is extremely old.  I'm going to be spending some time to write out a few of these for modern Operating Systems (MacOS, Red Hat / CentOS and Ubuntu are my first targets).
 
 There are tons of articles on how to lock down your Linux system.  Unfortunately while they agree on large swaths of the GNU/Linux system, there are disagreements.  My goal is to take the absolute best practices and roll them into scripts that help alleviate the issues for systems administrators and end users.
+
+Converting this to Ansible playbooks in the near future to help make its more standard across platforms.
